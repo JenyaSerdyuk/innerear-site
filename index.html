@@ -1316,8 +1316,8 @@ window.fitSecond=fitSecond;var t;addEventListener("resize",function(){clearTimeo
 <script>/* first screen: INNER EAR stays centred, and the space between the words is widened so the curtains part exactly in that space without cutting a letter */
 (function(){function fit(){document.querySelectorAll("#intro .half").forEach(function(h){var w=h.querySelector(".word"),sp=w&&w.querySelector(".sp");if(!sp)return;w.style.translate="";sp.style.width="";sp.style.display="";
 var ch=[].slice.call(w.querySelectorAll(".ch,.sp")),k=ch.indexOf(sp);if(k<1||k>ch.length-2)return;var R=function(e){return e.getBoundingClientRect()};
-var wI=R(ch[k-1]).right-R(ch[0]).left,wE=R(ch[ch.length-1]).right-R(ch[k+1]).left,fs=parseFloat(getComputedStyle(w).fontSize),gap=Math.max(wI-wE,wE-wI)+Math.max(8,fs*.06);
+var wI=R(ch[k-1]).right-R(ch[0]).left,wE=R(ch[ch.length-1]).right-R(ch[k+1]).left,fs=parseFloat(getComputedStyle(w).fontSize),gap=fs*.5;   /* the gap between the words sits right on the line where the curtains part */
 sp.style.display="inline-block";sp.style.width=Math.round(gap-(R(ch[k+1]).left-R(ch[k-1]).right-R(sp).width))+"px";
-var a=R(ch[0]).left,b=R(ch[ch.length-1]).right,hr=R(h);w.style.translate=(Math.round((hr.width/2-((a+b)/2-hr.left))*10)/10)+"px 0"})}
+var a=R(ch[k-1]).right,b=R(ch[k+1]).left,hr=R(h);w.style.translate=(Math.round((hr.width/2-((a+b)/2-hr.left))*10)/10)+"px 0"})}
 fit();addEventListener("load",fit);(document.fonts&&document.fonts.ready||Promise.resolve()).then(function(){setTimeout(fit,100)});var t;addEventListener("resize",function(){clearTimeout(t);t=setTimeout(fit,200)})})();</script>
 </body></html>
