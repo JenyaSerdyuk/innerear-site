@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>404 · Inner Ear</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#fff;--fg:#0a0a0a;--mut:#8a8a8a;--line:#e6e6e6;--red:#e0281b;--green:#1f9d55;--gbg:#f1f9f4}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a0a0a;--fg:#f2f2f2;--mut:#8a8a8a;--line:#262626;--gbg:#0f2016}}
+:root[data-theme="dark"]{--bg:#0a0a0a;--fg:#f2f2f2;--mut:#8a8a8a;--line:#262626;--gbg:#0f2016}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--fg);font:16px/1.5 'Hanken Grotesk',system-ui,sans-serif;display:flex;flex-direction:column}
+.top{display:flex;justify-content:space-between;align-items:center;padding:20px 16px;max-width:1080px;width:100%;margin:0 auto}
+.logo{font:500 20px 'Jost',sans-serif;letter-spacing:.06em;color:var(--fg);text-decoration:none}
+.cap{font:500 11px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px 56px;max-width:1080px;width:100%;margin:0 auto;text-align:center}
+.big{font:300 clamp(120px,24vw,260px)/.9 'Jost',sans-serif;letter-spacing:.02em;margin:0}
+.dev{height:clamp(200px,32vh,320px);width:auto;margin:14px 0 22px;filter:drop-shadow(0 22px 34px rgba(0,0,0,.18))}
+.det{font:400 clamp(20px,2.6vw,28px)/1.3 'Jost',sans-serif;margin:6px 0 0;min-height:2.6em;display:flex;align-items:center;justify-content:center;max-width:620px}
+.det span{transition:opacity .35s}.det b{color:var(--red);font-weight:500}
+.sub{font-size:16px;color:var(--mut);margin:0 0 22px;max-width:520px}
+.go{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px}
+.go a{font:500 15px 'Hanken Grotesk',sans-serif;text-decoration:none;color:var(--fg);border-bottom:1px solid currentColor;padding-bottom:1px}
+.cta{margin-top:30px;display:inline-flex;flex-direction:column;align-items:stretch}
+.tag{display:block;margin-top:10px;font:500 11px 'JetBrains Mono',monospace;text-transform:uppercase;color:var(--mut);white-space:nowrap;text-align:left}
+.btn{display:inline-block;background:var(--fg);color:var(--bg);text-decoration:none;font:500 13px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;padding:15px 26px}
+</style>
+</head>
+<body>
+<div class="top"><a class="logo" href="/" id="home1">INNER EAR</a></div>
+<main>
+  <div class="big" aria-hidden="true">404</div>
+  <p class="det"><span id="det">manipulation attempts detected this month</span></p>
+  <img class="dev" src="/img/341656806985.webp" onerror="if(!this.dataset.f){this.dataset.f=1;this.src='img/341656806985.webp'}" alt="Inner Ear AI recorder">
+  <p class="sub" id="sub">But not this page. It was never here — or it moved.</p>
+  <div class="go" id="go"></div>
+  <div class="cta"><a class="btn" id="buy" href="/en/#reserve">Pre-order · $139</a><span class="tag" id="tag">INNER EAR AI psy recorder</span></div>
+</main>
+<script>
+(function(){
+  var ru=/\/ru(\/|$)/.test(location.pathname)||/[?&]lang=ru/.test(location.search),L=ru?"ru":"en";
+  var T={
+    en:{det:["manipulation attempts detected this month","filler words detected in 2 months","times “it’s my fault” this year","arguments that started after 10 pm","pages that were never here"],
+        sub:"But not this page. It was never here — or it moved.",
+        go:[["Home","/en/"],["How it works","/en/#flow"],["Contact","/en/#contact"]],buy:"Pre-order · $139"},
+    ru:{det:["попытки манипуляции обнаружено за месяц","слова-паразита за 2 месяца","раза «это я виноват» за год","ссоры, начавшиеся после 22:00","страницы, которой никогда не было"],
+        sub:"Но этой страницы здесь нет. Её никогда не было — или она переехала.",
+        go:[["Главная","/ru/"],["Как это работает","/ru/#flow"],["Контакты","/ru/#contact"]],buy:"Предзаказ · 12 990 ₽"}}[L];
+  document.documentElement.lang=L;document.getElementById("sub").textContent=T.sub;
+  document.getElementById("go").innerHTML=T.go.map(function(a){return '<a href="'+a[1]+'">'+a[0]+'</a>'}).join("");
+  var b=document.getElementById("buy");b.textContent=T.buy;b.href="/"+L+"/#reserve";document.getElementById("home1").href="/"+L+"/";
+  /* caption under the button spans exactly from its left edge to its right edge */
+  var tg=document.getElementById("tag"),fitT=function(){tg.style.letterSpacing="0px";var r=document.createRange();r.selectNodeContents(tg);var bw=b.getBoundingClientRect().width,tw=r.getBoundingClientRect().width,n=tg.textContent.length;if(n>1&&bw>tw)tg.style.letterSpacing=((bw-tw)/(n-1))+"px";tg.style.marginRight=tg.style.letterSpacing&&tg.style.letterSpacing!=="0px"?"-"+tg.style.letterSpacing:"0"};
+  fitT();(document.fonts&&document.fonts.ready||Promise.resolve()).then(fitT);addEventListener("resize",fitT);
+  var d=document.getElementById("det"),i=0;d.innerHTML=T.det[0];
+  if(!matchMedia("(prefers-reduced-motion: reduce)").matches)setInterval(function(){d.style.opacity=0;setTimeout(function(){i=(i+1)%T.det.length;d.innerHTML=T.det[i];d.style.opacity=1},350)},2800);
+})();
+</script>
+</body>
+</html>
