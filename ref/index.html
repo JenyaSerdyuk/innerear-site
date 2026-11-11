@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Inner Ear · Partner program</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#fff;--text:#2a2a2a;--ink:#0a0a0a;--muted:#8a8a8a;--line:rgba(10,10,10,.08);--red:#e0281b;--green:#1f9d55;--soft:#f4f4f4;
+--f-logo:'Jost',ui-sans-serif,system-ui,sans-serif;--f-body:'Hanken Grotesk',ui-sans-serif,system-ui,-apple-system,'Segoe UI','PingFang SC','Hiragino Sans','Noto Sans KR','Noto Sans Arabic','Noto Sans Devanagari',sans-serif;--f-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--f-body);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:960px;margin:0 auto;padding:28px 24px 64px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.mono{font-family:var(--f-mono);letter-spacing:.12em;text-transform:uppercase;font-size:13px}
+.top a{text-decoration:none;color:var(--muted)}
+.top a:hover{color:var(--ink)}
+.k{color:var(--red);margin:72px 0 14px}
+h1{font-family:var(--f-logo);font-weight:300;font-size:clamp(40px,7vw,76px);line-height:1.02;margin:0;color:var(--ink);letter-spacing:-.01em}
+h1 b{font-weight:500}
+.lead{font-size:clamp(18px,2.2vw,22px);max-width:640px;margin:22px 0 0;color:var(--text)}
+.lead em{font-style:normal;color:var(--red);font-weight:600}
+form{display:flex;gap:10px;margin:38px 0 0;max-width:560px}
+input{flex:1;min-width:0;font:inherit;padding:15px 16px;border:1px solid rgba(10,10,10,.18);border-radius:0;background:#fff;color:var(--ink)}
+input:focus{outline:none;border-color:var(--ink)}
+.btn{font-family:var(--f-body);font-size:16px;font-weight:500;border:0;background:#444;color:#fff;padding:0 22px;cursor:pointer;white-space:nowrap}
+.btn:hover{background:var(--ink)}
+.err{color:var(--red);font-size:14px;min-height:20px;margin-top:8px}
+.box{margin:40px 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:30px 0}
+.lab{color:var(--muted);margin:0 0 12px}
+.link{display:flex;gap:10px;align-items:stretch;flex-wrap:wrap}
+.url{flex:1;min-width:240px;font-family:var(--f-mono);font-size:15px;background:var(--soft);padding:15px 16px;overflow-wrap:anywhere;color:var(--ink)}
+.ghost{background:#fff;color:var(--ink);border:1px solid rgba(10,10,10,.18);padding:0 18px}
+.ghost:hover{background:var(--soft)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:34px 0 0}
+.st{padding:0 18px;border-inline-start:1px solid var(--line)}
+.st:first-child{padding-inline-start:0;border:0}
+.num{font-family:var(--f-logo);font-weight:400;font-size:clamp(36px,5vw,56px);line-height:1;color:var(--ink)}
+.st.red .num{color:var(--red)}
+.st.green .num{color:var(--green)}
+.st .mono{color:var(--muted);margin-top:10px;font-size:12px}
+.note{color:var(--muted);font-size:14px;margin:18px 0 0}
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:56px 0 0}
+.how .n{color:var(--red)}
+.how p{margin:8px 0 0}
+.foot{margin-top:64px;color:var(--muted)}
+[hidden]{display:none!important}
+@media (max-width:700px){.k{margin-top:48px}form{flex-direction:column}.btn{padding:15px 22px}.stats{grid-template-columns:repeat(2,1fr);row-gap:26px}.st:nth-child(3){padding-inline-start:0;border:0}.how{grid-template-columns:1fr;gap:18px}.link .btn{flex:1 1 100%;padding:15px 22px}}
+html[dir=rtl] .lead,html[dir=rtl] h1{text-align:right}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top mono"><a href="https://whytfnot.studio" target="_blank" rel="noopener">WHY TF NOT STUDIO</a><a id="back" href="../" data-i="back">← Inner Ear</a></div>
+  <div class="k mono" data-i="k">Partner program</div>
+  <h1 id="h1">Share Inner Ear. <b>Earn with every order</b></h1>
+  <p class="lead" id="lead"></p>
+
+  <form id="f" novalidate>
+    <input id="em" type="email" autocomplete="email" placeholder="Email" data-ph="em">
+    <button class="btn" type="submit" data-i="get">Get my link</button>
+  </form>
+  <div class="err" id="err"></div>
+
+  <section class="box" id="mine" hidden>
+    <div class="lab mono" data-i="your">Your link</div>
+    <div class="link">
+      <div class="url" id="url"></div>
+      <button class="btn" id="copy" type="button" data-i="copy">Copy</button>
+      <button class="btn ghost" id="share" type="button" data-i="share" hidden>Share</button>
+    </div>
+    <div class="stats">
+      <div class="st red"><div class="num" id="sO">0</div><div class="mono" data-i="orders">Orders</div></div>
+      <div class="st"><div class="num">10%</div><div class="mono" data-i="pct">Your percent</div></div>
+      <div class="st green"><div class="num" id="sE">0</div><div class="mono" data-i="earned">Earned</div></div>
+      <div class="st"><div class="num" id="sM">0</div><div class="mono" data-i="months">Free months</div></div>
+    </div>
+    <p class="note" id="note"></p>
+  </section>
+
+  <section class="how">
+    <div><div class="n mono">01</div><p data-i="s1">Get your link</p></div>
+    <div><div class="n mono">02</div><p data-i="s2">Send it to friends, post it in feeds and stories</p></div>
+    <div><div class="n mono">03</div><p data-i="s3">See orders and earnings grow on this page</p></div>
+  </section>
+  <div class="foot mono">whytfnotinc@gmail.com</div>
+</div>
+<script>
+(function(){
+var PCT=0.10, SITE="https://innerear.whytfnot.studio/";
+var S={
+en:{k:"Partner program",h1:"Share Inner Ear. <b>Earn with every order</b>",lead:"Everyone who buys through your link brings you <em>10% of the price</em> and <em>1 month of subscription free</em>",get:"Get my link",your:"Your link",copy:"Copy",copied:"Copied",share:"Share",orders:"Orders",pct:"Your percent",earned:"Earned",months:"Free months",s1:"Get your link",s2:"Send it to friends, post it in feeds and stories",s3:"See orders and earnings grow on this page",back:"← Inner Ear",bad:"Enter a valid email",off:"Live stats will appear here once payments are connected",fail:"Could not save your link. Email us at whytfnotinc@gmail.com"},
+ru:{k:"Партнёрская программа",h1:"Делись Inner Ear. <b>Зарабатывай с каждого заказа</b>",lead:"Каждый, кто купит по твоей ссылке, приносит тебе <em>10% от цены</em> и <em>1 месяц подписки бесплатно</em>",get:"Получить ссылку",your:"Твоя ссылка",copy:"Копировать",copied:"Скопировано",share:"Поделиться",orders:"Заказы",pct:"Твой процент",earned:"Заработано",months:"Месяцев бесплатно",s1:"Получи свою ссылку",s2:"Отправь её друзьям, выложи в посты и сторис",s3:"Смотри, как здесь растут заказы и заработок",back:"← Inner Ear",bad:"Введите корректный email",off:"Статистика появится здесь, когда подключим оплату",fail:"Не получилось сохранить ссылку. Напиши нам на whytfnotinc@gmail.com"},
+es:{k:"Programa de socios",h1:"Comparte Inner Ear. <b>Gana con cada pedido</b>",lead:"Cada persona que compra con tu enlace te trae <em>el 10% del precio</em> y <em>1 mes de suscripción gratis</em>",get:"Obtener mi enlace",your:"Tu enlace",copy:"Copiar",copied:"Copiado",share:"Compartir",orders:"Pedidos",pct:"Tu porcentaje",earned:"Ganado",months:"Meses gratis",s1:"Obtén tu enlace",s2:"Envíalo a tus amigos, publícalo en posts e historias",s3:"Mira crecer aquí tus pedidos y ganancias",back:"← Inner Ear",bad:"Introduce un email válido",off:"Las estadísticas aparecerán aquí cuando conectemos los pagos",fail:"No pudimos guardar tu enlace. Escríbenos a whytfnotinc@gmail.com"},
+fr:{k:"Programme partenaire",h1:"Partagez Inner Ear. <b>Gagnez à chaque commande</b>",lead:"Chaque personne qui achète via votre lien vous rapporte <em>10 % du prix</em> et <em>1 mois d’abonnement offert</em>",get:"Obtenir mon lien",your:"Votre lien",copy:"Copier",copied:"Copié",share:"Partager",orders:"Commandes",pct:"Votre pourcentage",earned:"Gagné",months:"Mois offerts",s1:"Obtenez votre lien",s2:"Envoyez-le à vos amis, publiez-le en posts et en stories",s3:"Suivez ici vos commandes et vos gains",back:"← Inner Ear",bad:"Saisissez un email valide",off:"Les statistiques apparaîtront ici dès que les paiements seront connectés",fail:"Impossible d’enregistrer votre lien. Écrivez-nous à whytfnotinc@gmail.com"},
+it:{k:"Programma partner",h1:"Condividi Inner Ear. <b>Guadagna con ogni ordine</b>",lead:"Chi acquista dal tuo link ti porta <em>il 10% del prezzo</em> e <em>1 mese di abbonamento gratis</em>",get:"Ottieni il mio link",your:"Il tuo link",copy:"Copia",copied:"Copiato",share:"Condividi",orders:"Ordini",pct:"La tua percentuale",earned:"Guadagnato",months:"Mesi gratis",s1:"Ottieni il tuo link",s2:"Mandalo agli amici, pubblicalo nei post e nelle storie",s3:"Guarda crescere qui ordini e guadagni",back:"← Inner Ear",bad:"Inserisci un’email valida",off:"Le statistiche compariranno qui quando collegheremo i pagamenti",fail:"Non siamo riusciti a salvare il link. Scrivici a whytfnotinc@gmail.com"},
+pt:{k:"Programa de parceiros",h1:"Compartilhe o Inner Ear. <b>Ganhe com cada pedido</b>",lead:"Cada pessoa que compra pelo seu link rende <em>10% do preço</em> e <em>1 mês de assinatura grátis</em>",get:"Pegar meu link",your:"Seu link",copy:"Copiar",copied:"Copiado",share:"Compartilhar",orders:"Pedidos",pct:"Sua porcentagem",earned:"Ganho",months:"Meses grátis",s1:"Pegue seu link",s2:"Mande para amigos, publique em posts e stories",s3:"Veja aqui seus pedidos e ganhos crescerem",back:"← Inner Ear",bad:"Digite um email válido",off:"As estatísticas aparecem aqui quando conectarmos os pagamentos",fail:"Não conseguimos salvar seu link. Escreva para whytfnotinc@gmail.com"},
+de:{k:"Partnerprogramm",h1:"Teile Inner Ear. <b>Verdiene an jeder Bestellung</b>",lead:"Jeder Kauf über deinen Link bringt dir <em>10 % des Preises</em> und <em>1 Monat Abo gratis</em>",get:"Meinen Link holen",your:"Dein Link",copy:"Kopieren",copied:"Kopiert",share:"Teilen",orders:"Bestellungen",pct:"Dein Anteil",earned:"Verdient",months:"Gratismonate",s1:"Hol dir deinen Link",s2:"Schick ihn Freunden, poste ihn im Feed und in Storys",s3:"Sieh hier, wie Bestellungen und Verdienst wachsen",back:"← Inner Ear",bad:"Gib eine gültige E-Mail ein",off:"Die Statistik erscheint hier, sobald Zahlungen angebunden sind",fail:"Dein Link konnte nicht gespeichert werden. Schreib uns an whytfnotinc@gmail.com"},
+zh:{k:"合作伙伴计划",h1:"分享 Inner Ear，<b>每一单都有收益</b>",lead:"每位通过你的链接购买的人，都会为你带来<em>售价的 10%</em>，外加<em>1 个月免费订阅</em>",get:"获取我的链接",your:"你的链接",copy:"复制",copied:"已复制",share:"分享",orders:"订单",pct:"你的比例",earned:"已赚取",months:"免费月数",s1:"获取你的链接",s2:"发给朋友，或发布在动态和快拍里",s3:"在这里看订单和收益增长",back:"← Inner Ear",bad:"请输入有效的邮箱",off:"接入支付后，这里会显示统计",fail:"链接保存失败。请发邮件至 whytfnotinc@gmail.com"},
+ja:{k:"パートナープログラム",h1:"Inner Ear をシェアして、<b>注文ごとに報酬を</b>",lead:"あなたのリンクから購入した人ごとに、<em>価格の 10%</em> と <em>サブスク 1 か月無料</em> が受け取れます",get:"リンクを取得",your:"あなたのリンク",copy:"コピー",copied:"コピーしました",share:"シェア",orders:"注文",pct:"あなたの割合",earned:"獲得額",months:"無料月数",s1:"リンクを取得",s2:"友だちに送ったり、投稿やストーリーに載せたり",s3:"注文と報酬の伸びをこのページで確認",back:"← Inner Ear",bad:"正しいメールアドレスを入力してください",off:"決済の接続後、ここに統計が表示されます",fail:"リンクを保存できませんでした。whytfnotinc@gmail.com までご連絡ください"},
+ko:{k:"파트너 프로그램",h1:"Inner Ear를 공유하고 <b>주문마다 수익을</b>",lead:"내 링크로 구매한 사람마다 <em>가격의 10%</em>와 <em>구독 1개월 무료</em>를 받아요",get:"내 링크 받기",your:"내 링크",copy:"복사",copied:"복사됨",share:"공유",orders:"주문",pct:"내 비율",earned:"수익",months:"무료 개월",s1:"링크를 받으세요",s2:"친구에게 보내고, 게시물과 스토리에 올리세요",s3:"이 페이지에서 주문과 수익이 느는 걸 확인하세요",back:"← Inner Ear",bad:"올바른 이메일을 입력하세요",off:"결제가 연결되면 여기에 통계가 표시돼요",fail:"링크를 저장하지 못했어요. whytfnotinc@gmail.com 으로 연락 주세요"},
+ar:{k:"برنامج الشركاء",h1:"شارك Inner Ear. <b>واربح من كل طلب</b>",lead:"كل من يشتري عبر رابطك يمنحك <em>10% من السعر</em> و<em>شهر اشتراك مجاني</em>",get:"احصل على رابطي",your:"رابطك",copy:"نسخ",copied:"تم النسخ",share:"مشاركة",orders:"الطلبات",pct:"نسبتك",earned:"الأرباح",months:"أشهر مجانية",s1:"احصل على رابطك",s2:"أرسله إلى الأصدقاء وانشره في المنشورات والقصص",s3:"تابع نمو الطلبات والأرباح في هذه الصفحة",back:"Inner Ear →",bad:"أدخل بريدًا إلكترونيًا صحيحًا",off:"ستظهر الإحصاءات هنا بعد ربط الدفع",fail:"تعذّر حفظ رابطك. راسلنا على whytfnotinc@gmail.com"},
+hi:{k:"पार्टनर प्रोग्राम",h1:"Inner Ear शेयर करें। <b>हर ऑर्डर पर कमाएँ</b>",lead:"आपकी लिंक से खरीदने वाला हर व्यक्ति आपको <em>कीमत का 10%</em> और <em>1 महीने की सब्सक्रिप्शन मुफ़्त</em> दिलाता है",get:"मेरी लिंक पाएँ",your:"आपकी लिंक",copy:"कॉपी करें",copied:"कॉपी हो गया",share:"शेयर करें",orders:"ऑर्डर",pct:"आपका प्रतिशत",earned:"कमाई",months:"मुफ़्त महीने",s1:"अपनी लिंक पाएँ",s2:"दोस्तों को भेजें, पोस्ट और स्टोरीज़ में डालें",s3:"इस पेज पर ऑर्डर और कमाई बढ़ते देखें",back:"← Inner Ear",bad:"सही ईमेल डालें",off:"पेमेंट जुड़ने के बाद यहाँ आँकड़े दिखेंगे",fail:"लिंक सेव नहीं हो पाई। whytfnotinc@gmail.com पर लिखें"}
+};
+function g(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function p(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+var q=new URLSearchParams(location.search),L=q.get("lang")||g("ie-lang")||"";
+if(!S[L]){var m=(document.referrer||"").match(/\/(en|ru|zh|es|ar|hi|fr|it|ko|ja|pt|de)\//);L=m?m[1]:"en"}
+var PRICE=L==="ru"?{card:12990,crypto:11951}:{card:139,crypto:128},CUR=L==="ru"?"₽":"$";   /* the Russian site sells in rubles */
+var T=S[L],$=function(s){return document.getElementById(s)};
+document.documentElement.lang=L;if(L==="ar")document.documentElement.dir="rtl";
+document.querySelectorAll("[data-i]").forEach(function(e){var v=T[e.getAttribute("data-i")];if(v)e.textContent=v});
+$("h1").innerHTML=T.h1;$("lead").innerHTML=T.lead;
+$("back").href="../"+(L==="en"?"":L+"/");
+var db=null,user=null,uid=null,code=null,unsub=null;
+function link(c){return SITE+(L==="en"?"":L+"/")+"?ref="+c}
+function money(n){var v=(Math.round(n*100)/100).toFixed(2).replace(/\.00$/,"");return CUR==="₽"?v.replace(/\B(?=(\d{3})+(?!\d))/g," ")+" ₽":"$"+v}
+function show(c){code=c;$("sE").textContent=money(0);$("url").textContent=link(c);$("mine").hidden=false;$("f").hidden=true;
+  if(navigator.share)$("share").hidden=false;
+  if(!db){$("note").textContent=T.off;return}
+  if(unsub)return;
+  var t=setTimeout(function(){$("note").textContent=T.off},10000);
+  unsub=db.collection("reforders").where("ref","==",c).onSnapshot(function(s){clearTimeout(t);$("note").textContent="";
+    var n=0,e=0;s.docs.forEach(function(d){var x=d.data()||{};n++;e+=(PRICE[x.pay]||PRICE.card)*PCT});
+    $("sO").textContent=n;$("sE").textContent=money(e);$("sM").textContent=n},function(){clearTimeout(t);$("note").textContent=T.off})}
+function newCode(){var a="abcdefghjkmnpqrstuvwxyz23456789",s="";for(var i=0;i<7;i++)s+=a[Math.floor(Math.random()*a.length)];return s}
+$("f").addEventListener("submit",async function(ev){ev.preventDefault();var em=$("em").value.trim();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){$("err").textContent=T.bad;return}$("err").textContent="";
+  var c=newCode();
+  if(db&&uid){try{await db.doc("data/users/"+uid+"/ref").set({email:em,code:c,lang:L,ts:new Date().toISOString()})}catch(e){$("err").textContent=T.fail;return}}
+  else p("ie-ref-mine",c);
+  show(c)});
+$("copy").addEventListener("click",function(){var u=link(code);function ok(){$("copy").textContent=T.copied;setTimeout(function(){$("copy").textContent=T.copy},1600)}
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(u).then(ok,function(){fallback(u);ok()});else{fallback(u);ok()}});
+function fallback(u){var r=document.createRange();r.selectNodeContents($("url"));var s=getSelection();s.removeAllRanges();s.addRange(r);try{document.execCommand("copy")}catch(e){}}
+$("share").addEventListener("click",function(){navigator.share({title:"Inner Ear",url:link(code)}).catch(function(){})});
+var mine=g("ie-ref-mine");
+if(window.claude&&claude.use){Promise.all([claude.use("db"),claude.use("user")]).then(async function(r){db=r[0];user=r[1];
+    if(!db||!user)return mine&&show(mine);uid=await user.id();if(!uid)return mine&&show(mine);
+    try{var d=await db.doc("data/users/"+uid+"/ref").get();if(d.exists&&d.data().code)return show(d.data().code)}catch(e){}
+    if(mine)show(mine)}).catch(function(){mine&&show(mine)})}
+else if(mine)show(mine);
+})();
+</script>
+</body>
+</html>
