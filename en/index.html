@@ -897,7 +897,7 @@ let lenis=null;
 /* after the black scene one movement carries the page to the next screen (picture + "AI recorder that understands you"), and one movement back returns to the black scene */
 let gliding=false,hold=false,lastEv=0,lastAbs=0;
 const navH=()=>(nav&&nav.offsetHeight)||56;
-function glide(t){gliding=true;lenis.scrollTo(t,{duration:1.08,easing:x=>-(Math.cos(Math.PI*x)-1)/2,lock:true,force:true,onComplete:()=>{gliding=false;lastSY=scrollY}})}
+function glide(t){gliding=true;lenis.scrollTo(t,{duration:1.08,easing:x=>-(Math.cos(Math.PI*x)-1)/2,lock:true,force:true,onComplete:()=>{gliding=false;lastSY=scrollY;/* glide-hold: the rest of the same swipe is swallowed, so the page stops exactly where the glide put it */hold=true;lastEv=performance.now()}})}
 function snapFirst(dy,ev){const now=performance.now(),stop=()=>{if(ev&&ev.cancelable)ev.preventDefault();return true};
   if(gliding){lastEv=now;return stop()}
   if(hold){if(now-lastEv<200){lastEv=now;return stop()}hold=false}
