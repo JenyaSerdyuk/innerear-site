@@ -900,12 +900,13 @@ function glide(t){gliding=true;lenis.scrollTo(t,{duration:1.08,easing:x=>-(Math.
 function snapFirst(dy,ev){const now=performance.now(),stop=()=>{if(ev&&ev.cancelable)ev.preventDefault();return true};
   if(gliding){lastEv=now;return stop()}
   if(hold){if(now-lastEv<200){lastEv=now;return stop()}hold=false}
+  if(coarse)return false;   /* phone: no automatic move and no pause after the first scene */
   /* leftover momentum from the gesture that opened the curtains is ignored: only a fresh movement moves on from the black screen */
   /* only trackpad momentum (small, fading steps right after the curtains opened) is ignored; any real movement goes through at once */
   if(needQuiet&&dy>0&&now-(window.__openAt||0)>1000)needQuiet=false;   /* never hold the black screen longer than 1 s */
   if(needQuiet&&dy>0){const a=Math.abs(dy),inertia=now-lastEv<260&&a<40&&a<=lastAbs*1.05;lastAbs=a;if(inertia){lastEv=now;return stop()}needQuiet=false}
   lastAbs=Math.abs(dy);lastEv=now;
-  /* wheel-free: on a computer the page after the black screen follows the mouse wheel directly, with no automatic glide and no pause */if(!coarse)return false;
+  /* wheel-free: on a computer the page after the black screen follows the mouse wheel directly, with no automatic glide and no pause; on phones the same: the page moves only with the finger */return false;
   if(window.__jump||locked||!lenis)return false;
   const I=splits[0];if(!I||I.anim<.98)return false;
   const f=document.getElementById("flow");if(!f)return false;
