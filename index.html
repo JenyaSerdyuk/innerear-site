@@ -1236,46 +1236,7 @@ form.addEventListener("submit",async e=>{
 })();
 </script>
 
-<script>
-/* review emulator: only in the prototype. Buttons: site / both / computer 1440x900 / phone 390x844 */
-(function(){
-  let inEmu=false;try{inEmu=new URL(location.href).searchParams.get('ieemu')==='1'}catch(e){}
-  if(inEmu)return;
-  const st=document.createElement('style');
-  st.textContent='.emu-bar{position:fixed;right:16px;bottom:16px;z-index:10001;display:flex;gap:4px;padding:4px;border-radius:999px;background:#0a0a0a;box-shadow:0 4px 18px rgba(0,0,0,.25);font:500 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase}'+
-   '.emu-bar button{all:unset;cursor:pointer;color:#fff;padding:10px 14px;border-radius:999px}.emu-bar button[aria-pressed="true"]{background:#fff;color:#0a0a0a}'+
-   '.emu-wrap{position:fixed;inset:0;z-index:250;background:#2a2a2a;overflow:hidden}'+
-   '.emu-row{position:absolute;left:50%;top:calc(50% - 25px);display:flex;align-items:center;transform-origin:center center}'+
-   '.emu-cell{display:flex;flex-direction:column;align-items:center;gap:22px}.emu-cap{font:500 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase;color:#9a9a9a}'+
-   '.emu-dev{position:relative;flex:none;background:#111;box-shadow:0 0 0 10px #111,0 20px 60px rgba(0,0,0,.5);border-radius:6px;overflow:hidden}'+
-   '.emu-dev.ph{border-radius:36px}.emu-dev iframe{border:0;display:block;position:absolute;left:-2px;top:-2px;width:calc(100% + 4px);height:calc(100% + 4px);background:#111}html.emu-on .cur{display:none!important}'+
-   '@media (max-width:700px){.emu-bar{left:8px;right:8px;justify-content:center}.emu-bar button{padding:10px 10px}.ckb{bottom:64px!important}}';
-  document.head.appendChild(st);
-  const bar=document.createElement('div');bar.className='emu-bar';bar.setAttribute('role','group');
-  const M=[['off','Сайт'],['both','Оба'],['pc','Компьютер'],['ph','Телефон']];
-  bar.innerHTML=M.map(m=>'<button type="button" data-m="'+m[0]+'">'+m[1]+'</button>').join('');
-  const GAP=80,CAPH=34;
-  let wrap=null;
-  function fit(){if(!wrap)return;const r=wrap.firstChild,w=+r.dataset.w,h=+r.dataset.h,k=Math.min(1,(innerWidth-48)/(w+20),(innerHeight-90)/(h+20));r.style.transform='translate(-50%,-50%) scale('+k+')'}
-  function dev(m,u){const w=m==='ph'?390:1440,h=m==='ph'?844:900;
-    return '<div class="emu-cell"><div class="emu-dev'+(m==='ph'?' ph':'')+'" style="width:'+w+'px;height:'+h+'px"><iframe title="'+(m==='ph'?'Телефон 390×844':'Компьютер 1440×900')+'" src="'+u+'"></iframe></div><div class="emu-cap">'+(m==='ph'?'Телефон · 390×844':'Компьютер · 1440×900')+'</div></div>'}
-  function set(m){try{localStorage.setItem('ie_emu',m)}catch(e){}
-    [...bar.children].forEach(b=>b.setAttribute('aria-pressed',b.dataset.m===m));
-    if(wrap){wrap.remove();wrap=null}document.documentElement.style.overflow='';document.documentElement.classList.remove('emu-on');
-    if(window.__lenis)window.__lenis.start();
-    if(m==='off')return;
-    let u;try{u=new URL(location.href);u.searchParams.set('ieemu','1');u.hash=''}catch(e){u=location.pathname+'?ieemu=1'}u=String(u);
-    const list=m==='both'?['pc','ph']:[m];
-    const w=list.reduce((a,x)=>a+(x==='ph'?390:1440),0)+(list.length-1)*GAP,h=Math.max(...list.map(x=>x==='ph'?844:900))+CAPH;
-    wrap=document.createElement('div');wrap.className='emu-wrap';
-    wrap.innerHTML='<div class="emu-row" data-w="'+w+'" data-h="'+h+'" style="gap:'+GAP+'px;width:'+w+'px">'+list.map(x=>dev(x,u)).join('')+'</div>';
-    document.body.appendChild(wrap);document.documentElement.style.overflow='hidden';document.documentElement.classList.add('emu-on');if(window.__lenis)window.__lenis.stop();fit()}
-  bar.addEventListener('click',e=>{const b=e.target.closest('button');if(b)set(b.dataset.m)});
-  addEventListener('resize',fit);
-  function add(){if(bar.isConnected)return;document.body.appendChild(bar);let s='both';try{s=localStorage.getItem('ie_emu')||'both'}catch(e){}if(!M.some(x=>x[0]===s))s='both';/* on a narrow screen the device frames are too small to use: open the plain site */if(innerWidth<760)s='off';set(s)}
-  if(document.readyState==='loading')addEventListener('DOMContentLoaded',add);else add();
-})();
-</script>
+
 
 <script>
 /* intro: green cards show the same situation after Inner Ear: phrases change in step with the red cards; long labels and phrases shrink to fit their card */
